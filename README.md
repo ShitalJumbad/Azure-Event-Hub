@@ -1,4 +1,4 @@
-# Kafka-Event-Hub
+# Azure-Event-Hub
 
 1) Azure Event Hub is PAAS(managed service), whereas when you run Kafka on Azure it's an IAAS solution(manage your own Linux VM-s, more control and more integration) .
  
