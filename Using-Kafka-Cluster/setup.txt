@@ -1,6 +1,6 @@
 Requirements:-
-1) Kafka installed
-2) Azure CLI [Click](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest&WT.mc_id=devto-blog-abhishgu)
+1) Kafka installed (https://github.com/ShitalJumbad/Kafka)
+2) Azure CLI (https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest&WT.mc_id=devto-blog-abhishgu)
 3) Clone this repo
 
 Create Event Hub Namespace, Event Hub as shown in https://github.com/ShitalJumbad/Azure-Event-Hub  or https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-quickstart-kafka-enabled-event-hubs
