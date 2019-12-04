@@ -145,3 +145,5 @@ Endpoint=sb://neweventhubsnamespace1.servicebus.windows.net/;SharedAccessKeyName
  
  References :
  https://blogs.msdn.microsoft.com/opensourcemsft/2015/08/08/choosing-between-azure-event-hub-and-kafka-what-you-need-to-know/
+ 
+ https://dev.to/azure/how-to-quickly-test-connectivity-to-your-azure-event-hubs-for-kafka-cluster-without-writing-any-code-4la1
