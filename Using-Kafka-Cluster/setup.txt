@@ -1,0 +1,44 @@
+Requirements:-
+1) Kafka installed
+2) Azure CLI [Click](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest&WT.mc_id=devto-blog-abhishgu)
+3) Clone this repo
+
+Create Event Hub Namespace, Event Hub as shown in https://github.com/ShitalJumbad/Azure-Event-Hub  or https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-quickstart-kafka-enabled-event-hubs
+
+1) Set the environment variables shown
+
+    1) export AZURE_RESOURCE_GROUP=< fill >
+    2) export EVENT_HUBS_NAMESPACE=< fill >
+    3) export EVENT_HUB_NAME=< fill >
+    4) export KAFKA_OPTS="-Djava.security.auth.login.config=jaas.conf"
+    5) export KAFKA_INSTALL_HOME=< fill >  e.g. /home/shital/kafka/kafka_2.11-2.2.1
+    6) export EVENT_HUB_AUTH_RULE_NAME=< fill > e.g. RootManageSharedAccessKey
+       or
+       export EVENT_HUB_AUTH_RULE_NAME=$(az eventhubs namespace authorization-rule list --resource-group $AZURE_RESOURCE_GROUP --namespace-name $EVENT_HUBS_NAMESPACE | jq '.[0].name' | sed "s/\"//g")
+
+2) Set the username and password in jass.conf
+
+    1) username="$ConnectionString"
+    2) Enter the follwing command to get the password
+       
+       az eventhubs namespace authorization-rule keys list --resource-group $AZURE_RESOURCE_GROUP --namespace-name $EVENT_HUBS_NAMESPACE --name $EVENT_HUB_AUTH_RULE_NAME | jq '.primaryConnectionString'
+        
+       Make sure you have logged in (az login)
+       
+       Contents of jaas.conf
+
+        KafkaClient {
+            org.apache.kafka.common.security.plain.PlainLoginModule required
+            username="$ConnectionString"
+            password=enter-connection-string-here;
+        };
+       
+3) Run Consumer
+
+    $KAFKA_INSTALL_HOME/bin/kafka-console-consumer.sh --topic $EVENT_HUB_NAME --bootstrap-server $EVENT_HUBS_NAMESPACE.servicebus.windows.net:9093 --consumer.config client_common.properties
+
+3) Run Producer
+
+    $KAFKA_INSTALL_HOME/bin/kafka-console-producer.sh --topic $EVENT_HUB_NAME --broker-list $EVENT_HUBS_NAMESPACE.servicebus.windows.net:9093 --producer.config client_common.properties
+
+
